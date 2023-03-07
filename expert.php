@@ -1,6 +1,7 @@
 <?php
 
-// In strict mode, only a variable of the requested type (like: int of the type declaration) will be accepted, or a TypeError will be thrown.
+// In strict mode, only a variable of the requested type 
+// (like: int of the type declaration) will be accepted, or a TypeError will be thrown.
 declare(strict_types=1);
 
 echo "Exercise 1 starts here:";
@@ -25,7 +26,7 @@ echo substr($str, 0, 10);
 
 new_exercise(4);
 
-foreach($week as &$day)
+foreach ($week as &$day)
 {
     $day = substr($day, 0, -3);
 }
@@ -50,6 +51,8 @@ foreach(range('a','z') as $letter) {
 }
 */
 
+// ;$letter <=> "aa"; loop until aa == aa (-101) false 0
+// $letter = "a"; $letter <= "z"; $letter++
 for ($i = 97; $i <= 122; $i++) {
     array_push($arr, chr($i));
 }
@@ -60,16 +63,18 @@ new_exercise(7);
 
 function login(string $email, string $password)
 {
-    if($email == 'john@example.be' && $password == 'pocahontas') {
-        return 'Welcome John Smith\n';
+    if ($email == 'john@example.be' // change || to &&
+    && $password == 'pocahontas') {
+        return 'Welcome John Smith<br/>';
+        // put Smith behind John
     }
-    return 'No access\n';
+    return 'No access<br/>';
 }
 
 //should greet the user with his full name (John Smith)
-echo login('john@example.be', 'pocahontas'); // put Smith behind John
+echo login('john@example.be', 'pocahontas'); 
 //Should say: no access
-echo login('john@example.be', 'dfgidfgdfg'); // change || to &&
+echo login('john@example.be', 'dfgidfgdfg'); 
 //Should say: no access
 echo login('wrong@example', 'wrong');
 
@@ -81,10 +86,11 @@ function isLinkValid(string $link)
 
     foreach ($unacceptables as $unacceptable) {
         if (strpos($link, $unacceptable) !== false) { // !== false instead of == true
-            return 'Unacceptable Found<br />';
+            // str_contains() === true
+            return 'Unacceptable Found<br>';
         }
     }
-    return 'Acceptable<br />';
+    return 'Acceptable<br>';
 }
 //invalid link
 echo isLinkValid('http://www.google.com/hack.pdf');
@@ -100,13 +106,19 @@ new_exercise(9);
 $areTheseFruits = ['apple', 'bear', 'beef', 'banana', 'cherry', 'tomato', 'car'];
 $validFruits = ['apple', 'pear', 'banana', 'cherry', 'tomato'];
 //from here on you can change the code
-
-$arrayLength = count($areTheseFruits);
-for($i=0; $i < $arrayLength; $i++) {
-    if(!in_array($areTheseFruits[$i], $validFruits)) {
+$arrayLength = count($areTheseFruits); // add this line
+for ($i=0; $i < $arrayLength; $i++) {
+    if (!in_array($areTheseFruits[$i], $validFruits)) {
         unset($areTheseFruits[$i]);
     }
 }
+/*
+foreach($areTheseFruits as $index => $value) {
+    if(!in_array($value, $validFruits)) {
+        unset($areTheseFruits[$index]);
+    }
+}
+*/
 var_dump($areTheseFruits);//do not change this
 
 new_exercise(10);
@@ -118,7 +130,7 @@ function combineNames($str1 = "", $str2 = "")
     $params = [$str1, $str2];
     // pass by reference (&) and 
     // pass index to randomHeroName were 0 is equal to hero_firstnames or lastname = false
-    foreach($params as $index=>&$param) {
+    foreach ($params as $index => &$param) {
         if ($param == "") {
             $param = randomHeroName($index);
         }
