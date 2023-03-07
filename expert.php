@@ -61,9 +61,9 @@ new_exercise(7);
 function login(string $email, string $password)
 {
     if($email == 'john@example.be' && $password == 'pocahontas') {
-        return 'Welcome John Smith';
+        return 'Welcome John Smith\n';
     }
-    return 'No access';
+    return 'No access\n';
 }
 
 //should greet the user with his full name (John Smith)
@@ -111,27 +111,30 @@ var_dump($areTheseFruits);//do not change this
 
 new_exercise(10);
 
-$arr = [];
+//$arr = [];
 
 function combineNames($str1 = "", $str2 = "")
 {
     $params = [$str1, $str2];
-    foreach($params as &$param) {
+    // pass by reference (&) and 
+    // pass index to randomHeroName were 0 is equal to hero_firstnames or lastname = false
+    foreach($params as $index=>&$param) {
         if ($param == "") {
-            $param = randomHeroName();
+            $param = randomHeroName($index);
         }
     }
-    
+    // return instead of echo and switch arguments
     return implode(" - ", $params);
 }
 
-function randomHeroName()
+function randomHeroName($lastname = true)
 {
     $hero_firstnames = ["captain", "doctor", "iron", "Hank", "ant", "Wasp", "the", "Hawk", "Spider", "Black", "Carol"];
     $hero_lastnames = ["America", "Strange", "man", "Pym", "girl", "hulk", "eye", "widow", "panther", "daredevil", "marvel"];
     $heroes = [$hero_firstnames, $hero_lastnames];
-    $randName = $heroes[rand(0,count($heroes)-1)][rand(0, 10)];
-
+    // change random heroes to lastname (1) or firstname (0)
+    $randName = $heroes[$lastname][rand(0, 10)];
+    // return instead of echo
     return $randName;
 }
 
